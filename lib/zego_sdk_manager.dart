@@ -26,7 +26,7 @@ class ZEGOSDKManager {
   }) async {
     await expressService.init(appID: appID, appSign: appSign);
     await zimService.init(appID: appID, appSign: appSign);
-    await effectsService.init(appID, appSign ?? '');
+    // await effectsService.init(appID, appSign ?? '');
 
     this.appID = appID;
     this.appSign = appSign ?? '';

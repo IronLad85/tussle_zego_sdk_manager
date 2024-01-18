@@ -58,7 +58,6 @@ class ExpressService {
       appID,
       scenario,
       appSign: appSign,
-      enablePlatformView: true,
     );
     currentScenario = scenario;
     await ZegoExpressEngine.createEngineWithProfile(profile);

@@ -83,6 +83,7 @@ class ZIMService {
       StreamController<OnInComingRoomRequestCancelledEvent>.broadcast();
   final onRoomCommandReceivedEventStreamCtrl =
       StreamController<OnRoomCommandReceivedEvent>.broadcast();
+  final onTokenExpiryStreamCtrl = StreamController<int>.broadcast();
 
   void initEventHandle() {
     ZIMEventHandler.onConnectionStateChanged = onConnectionStateChanged;
@@ -98,6 +99,7 @@ class ZIMService {
     ZIMEventHandler.onCallUserStateChanged = onCallUserStateChanged;
     ZIMEventHandler.onRoomAttributesUpdated = onRoomAttributesUpdated;
     ZIMEventHandler.onRoomAttributesBatchUpdated = onRoomAttributesBatchUpdated;
+    ZIMEventHandler.onTokenWillExpire = onTokenWillExpire;
   }
 
   void uninitEventHandle() {
@@ -114,6 +116,7 @@ class ZIMService {
     ZIMEventHandler.onCallUserStateChanged = null;
     ZIMEventHandler.onRoomAttributesUpdated = null;
     ZIMEventHandler.onRoomAttributesBatchUpdated = null;
+    ZIMEventHandler.onTokenWillExpire = null;
   }
 
   Future<void> init({required int appID, String? appSign}) async {
@@ -132,6 +135,10 @@ class ZIMService {
 
   Future<void> uploadLog() {
     return ZIM.getInstance()!.uploadLog();
+  }
+
+  Future<void> renewToken(String newToken) async {
+    ZIM.getInstance()!.renewToken(newToken);
   }
 
   Future<void> connectUser(String userID, String userName,
@@ -198,6 +205,10 @@ class ZIMService {
       debugPrint('currentRoomID is null');
       return ZIMRoomLeftResult(roomID: '');
     }
+  }
+
+  void onTokenWillExpire(ZIM zimSdk, int remainingSeconds) {
+    onTokenExpiryStreamCtrl.add(remainingSeconds);
   }
 
   void onConnectionStateChanged(

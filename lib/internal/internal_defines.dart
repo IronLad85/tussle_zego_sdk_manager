@@ -33,7 +33,8 @@ class ZegoRoomStreamListUpdateEvent {
   final List<ZegoStream> streamList;
   final Map<String, dynamic> extendedData;
 
-  ZegoRoomStreamListUpdateEvent(this.roomID, this.updateType, this.streamList, this.extendedData);
+  ZegoRoomStreamListUpdateEvent(
+      this.roomID, this.updateType, this.streamList, this.extendedData);
 
   @override
   String toString() {
@@ -59,7 +60,8 @@ class ZegoRoomStateEvent {
   final int errorCode;
   final Map<String, dynamic> extendedData;
 
-  ZegoRoomStateEvent(this.roomID, this.reason, this.errorCode, this.extendedData);
+  ZegoRoomStateEvent(
+      this.roomID, this.reason, this.errorCode, this.extendedData);
 
   @override
   String toString() {
@@ -128,7 +130,8 @@ class ZIMServiceConnectionStateChangedEvent {
   final ZIMConnectionEvent event;
   final Map extendedData;
 
-  ZIMServiceConnectionStateChangedEvent(this.state, this.event, this.extendedData);
+  ZIMServiceConnectionStateChangedEvent(
+      this.state, this.event, this.extendedData);
   @override
   String toString() {
     return 'ZIMServiceConnectionStateChangedEvent{state: ${state.name}, event: ${event.name}, extendedData: $extendedData}';
@@ -141,7 +144,8 @@ class ZIMServiceRoomStateChangedEvent {
   final ZIMRoomEvent event;
   final Map extendedData;
 
-  ZIMServiceRoomStateChangedEvent(this.roomID, this.state, this.event, this.extendedData);
+  ZIMServiceRoomStateChangedEvent(
+      this.roomID, this.state, this.event, this.extendedData);
 
   @override
   String toString() {
@@ -152,7 +156,8 @@ class ZIMServiceRoomStateChangedEvent {
 class ZIMServiceReceiveRoomCustomSignalingEvent {
   final String signaling;
   final String senderUserID;
-  ZIMServiceReceiveRoomCustomSignalingEvent({required this.signaling, required this.senderUserID});
+  ZIMServiceReceiveRoomCustomSignalingEvent(
+      {required this.signaling, required this.senderUserID});
 
   @override
   String toString() {
@@ -163,7 +168,8 @@ class ZIMServiceReceiveRoomCustomSignalingEvent {
 class IncomingUserRequestReceivedEvent {
   final String requestID;
   final ZIMCallInvitationReceivedInfo info;
-  IncomingUserRequestReceivedEvent({required this.requestID, required this.info});
+  IncomingUserRequestReceivedEvent(
+      {required this.requestID, required this.info});
 
   @override
   String toString() {
@@ -174,7 +180,8 @@ class IncomingUserRequestReceivedEvent {
 class IncomingUserRequestCancelledEvent {
   final String requestID;
   final ZIMCallInvitationCancelledInfo info;
-  IncomingUserRequestCancelledEvent({required this.requestID, required this.info});
+  IncomingUserRequestCancelledEvent(
+      {required this.requestID, required this.info});
 
   @override
   String toString() {
@@ -185,7 +192,8 @@ class IncomingUserRequestCancelledEvent {
 class OutgoingUserRequestAcceptedEvent {
   final String requestID;
   final ZIMCallInvitationAcceptedInfo info;
-  OutgoingUserRequestAcceptedEvent({required this.requestID, required this.info});
+  OutgoingUserRequestAcceptedEvent(
+      {required this.requestID, required this.info});
 
   @override
   String toString() {
@@ -196,7 +204,8 @@ class OutgoingUserRequestAcceptedEvent {
 class OutgoingUserRequestRejectedEvent {
   final String requestID;
   final ZIMCallInvitationRejectedInfo info;
-  OutgoingUserRequestRejectedEvent({required this.requestID, required this.info});
+  OutgoingUserRequestRejectedEvent(
+      {required this.requestID, required this.info});
 
   @override
   String toString() {
@@ -207,7 +216,8 @@ class OutgoingUserRequestRejectedEvent {
 class IncomingUserRequestTimeoutEvent {
   final String requestID;
   final ZIMCallInvitationTimeoutInfo info;
-  IncomingUserRequestTimeoutEvent({required this.info, required this.requestID});
+  IncomingUserRequestTimeoutEvent(
+      {required this.info, required this.requestID});
 
   @override
   String toString() {
@@ -218,7 +228,8 @@ class IncomingUserRequestTimeoutEvent {
 class OutgoingUserRequestTimeoutEvent {
   final String requestID;
   final List<String> invitees;
-  OutgoingUserRequestTimeoutEvent({required this.requestID, required this.invitees});
+  OutgoingUserRequestTimeoutEvent(
+      {required this.requestID, required this.invitees});
 
   @override
   String toString() {
@@ -344,7 +355,8 @@ class CancelRoomRequestEvent {
 class OnInComingRoomRequestReceivedEvent {
   final String requestID;
   String? extendedData;
-  OnInComingRoomRequestReceivedEvent({required this.requestID, this.extendedData});
+  OnInComingRoomRequestReceivedEvent(
+      {required this.requestID, this.extendedData});
 
   @override
   String toString() {
@@ -355,7 +367,8 @@ class OnInComingRoomRequestReceivedEvent {
 class OnOutgoingRoomRequestAcceptedEvent {
   final String requestID;
   String? extendedData;
-  OnOutgoingRoomRequestAcceptedEvent({required this.requestID, this.extendedData});
+  OnOutgoingRoomRequestAcceptedEvent(
+      {required this.requestID, this.extendedData});
 
   @override
   String toString() {
@@ -366,7 +379,8 @@ class OnOutgoingRoomRequestAcceptedEvent {
 class OnOutgoingRoomRequestRejectedEvent {
   final String requestID;
   String? extendedData;
-  OnOutgoingRoomRequestRejectedEvent({required this.requestID, this.extendedData});
+  OnOutgoingRoomRequestRejectedEvent(
+      {required this.requestID, this.extendedData});
 
   @override
   String toString() {
@@ -377,7 +391,8 @@ class OnOutgoingRoomRequestRejectedEvent {
 class OnInComingRoomRequestCancelledEvent {
   final String requestID;
   String? extendedData;
-  OnInComingRoomRequestCancelledEvent({required this.requestID, this.extendedData});
+  OnInComingRoomRequestCancelledEvent(
+      {required this.requestID, this.extendedData});
 
   @override
   String toString() {

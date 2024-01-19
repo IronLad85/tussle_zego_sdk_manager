@@ -73,6 +73,10 @@ class ExpressService {
     await ZegoExpressEngine.destroyEngine();
   }
 
+  Future<void> renewToken(String newToken) async {
+    instance.renewToken(newToken);
+  }
+
   Future<void> connectUser(String id, String name, {String? token}) async {
     currentUser = ZegoSDKUser(userID: id, userName: name);
   }

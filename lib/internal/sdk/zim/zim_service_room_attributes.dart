@@ -1,8 +1,11 @@
 part of 'zim_service.dart';
 
 extension ZIMServiceRoom on ZIMService {
-  Future<ZIMRoomAttributesOperatedCallResult?> setRoomAttributes(Map<String, String> attributes,
-      {bool isForce = false, bool isUpdateOwner = false, bool isDeleteAfterOwnerLeft = false}) async {
+  Future<ZIMRoomAttributesOperatedCallResult?> setRoomAttributes(
+      Map<String, String> attributes,
+      {bool isForce = false,
+      bool isUpdateOwner = false,
+      bool isDeleteAfterOwnerLeft = false}) async {
     if (ZIM.getInstance() != null) {
       final result = await ZIM.getInstance()!.setRoomAttributes(
             attributes,
@@ -22,7 +25,9 @@ extension ZIMServiceRoom on ZIMService {
   }
 
   void beginRoomAttributesBatchOperation(
-      {bool isForce = false, bool isUpdateOwner = false, bool isDeleteAfterOwnerLeft = false}) {
+      {bool isForce = false,
+      bool isUpdateOwner = false,
+      bool isDeleteAfterOwnerLeft = false}) {
     ZIM.getInstance()?.beginRoomAttributesBatchOperation(
           currentRoomID ?? '',
           ZIMRoomAttributesBatchOperationConfig()
@@ -32,11 +37,15 @@ extension ZIMServiceRoom on ZIMService {
         );
   }
 
-  Future<ZIMRoomAttributesBatchOperatedResult?> endRoomPropertiesBatchOperation() async {
-    return ZIM.getInstance()?.endRoomAttributesBatchOperation(currentRoomID ?? '');
+  Future<ZIMRoomAttributesBatchOperatedResult?>
+      endRoomPropertiesBatchOperation() async {
+    return ZIM
+        .getInstance()
+        ?.endRoomAttributesBatchOperation(currentRoomID ?? '');
   }
 
-  Future<ZIMRoomAttributesOperatedCallResult?> deleteRoomAttributes(List<String> keys) async {
+  Future<ZIMRoomAttributesOperatedCallResult?> deleteRoomAttributes(
+      List<String> keys) async {
     if (ZIM.getInstance() != null) {
       final result = await ZIM.getInstance()!.deleteRoomAttributes(
             keys,
@@ -56,7 +65,8 @@ extension ZIMServiceRoom on ZIMService {
     }
   }
 
-  void onRoomAttributesUpdated(ZIM zim, ZIMRoomAttributesUpdateInfo updateInfo, String roomID) {
+  void onRoomAttributesUpdated(
+      ZIM zim, ZIMRoomAttributesUpdateInfo updateInfo, String roomID) {
     final setProperties = <Map<String, String>>[];
     final deleteProperties = <Map<String, String>>[];
     if (updateInfo.action == ZIMRoomAttributesUpdateAction.set) {
@@ -72,11 +82,14 @@ extension ZIMServiceRoom on ZIMService {
         roomAttributesMap.remove(key);
       }
     });
-    roomAttributeUpdateStreamCtrl.add(ZIMServiceRoomAttributeUpdateEvent(updateInfo: updateInfo));
-    roomAttributeUpdateStreamCtrl2.add(RoomAttributesUpdatedEvent(setProperties, deleteProperties));
+    roomAttributeUpdateStreamCtrl
+        .add(ZIMServiceRoomAttributeUpdateEvent(updateInfo: updateInfo));
+    roomAttributeUpdateStreamCtrl2
+        .add(RoomAttributesUpdatedEvent(setProperties, deleteProperties));
   }
 
-  void onRoomAttributesBatchUpdated(_, List<ZIMRoomAttributesUpdateInfo> updateInfo, String roomID) {
+  void onRoomAttributesBatchUpdated(
+      _, List<ZIMRoomAttributesUpdateInfo> updateInfo, String roomID) {
     final setProperties = <Map<String, String>>[];
     final deleteProperties = <Map<String, String>>[];
     for (final info in updateInfo) {
@@ -92,7 +105,9 @@ extension ZIMServiceRoom on ZIMService {
         });
       }
     }
-    roomAttributeUpdateStreamCtrl2.add(RoomAttributesUpdatedEvent(setProperties, deleteProperties));
-    roomAttributeBatchUpdatedStreamCtrl.add(ZIMServiceRoomAttributeBatchUpdatedEvent(roomID, updateInfo));
+    roomAttributeUpdateStreamCtrl2
+        .add(RoomAttributesUpdatedEvent(setProperties, deleteProperties));
+    roomAttributeBatchUpdatedStreamCtrl
+        .add(ZIMServiceRoomAttributeBatchUpdatedEvent(roomID, updateInfo));
   }
 }

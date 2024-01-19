@@ -69,6 +69,11 @@ class ZEGOSDKManager {
     return;
   }
 
+  Future<void> renewToken(String newToken) async {
+    zimService.renewToken(newToken);
+    expressService.renewToken(newToken);
+  }
+
   Future<ZegoRoomLoginResult> loginRoom(
     String roomID,
     ZegoScenario scenario, {

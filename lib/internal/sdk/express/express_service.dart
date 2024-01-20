@@ -229,6 +229,8 @@ class ExpressService {
   final recvSEICtrl = StreamController<ZegoRecvSEIEvent>.broadcast();
   final mixerSoundLevelUpdateCtrl =
       StreamController<ZegoMixerSoundLevelUpdateEvent>.broadcast();
+  final videoPlayerStreamUpdateCtrl =
+      StreamController<(ZegoStreamEvent, String, String)>.broadcast();
 
   void uninitEventHandle() {
     ZegoExpressEngine.onRoomStreamUpdate = null;
@@ -246,6 +248,8 @@ class ExpressService {
   }
 
   void initEventHandle() {
+    ZegoExpressEngine.onPlayerStreamEvent =
+        ExpressService().onVideoPlayerStreamUpdate;
     ZegoExpressEngine.onRoomStreamUpdate = ExpressService().onRoomStreamUpdate;
     ZegoExpressEngine.onRoomUserUpdate = ExpressService().onRoomUserUpdate;
     ZegoExpressEngine.onRoomStreamExtraInfoUpdate =
@@ -266,6 +270,18 @@ class ExpressService {
         ExpressService().onRoomExtraInfoUpdate;
     ZegoExpressEngine.onPublisherStateUpdate =
         ExpressService().onPublisherStateUpdate;
+  }
+
+  void onVideoPlayerStreamUpdate(
+    ZegoStreamEvent event,
+    String streamId,
+    String extraInfo,
+  ) {
+    videoPlayerStreamUpdateCtrl.add((
+      event,
+      streamId,
+      extraInfo,
+    ));
   }
 
   void onRoomUserUpdate(

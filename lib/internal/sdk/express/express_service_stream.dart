@@ -41,12 +41,15 @@ extension ExpressServiceStream on ExpressService {
     final extraInfo = jsonEncode({
       'mic': currentUser!.isMicOnNotifier.value ? 'on' : 'off',
       'cam': currentUser!.isCamerOnNotifier.value ? 'on' : 'off',
+      'env': ZEGOSDKManager().environment,
     });
     await ZegoExpressEngine.instance.setStreamExtraInfo(extraInfo);
   }
 
-  Future<void> startPublishingStream(String streamID,
-      {ZegoPublishChannel channel = ZegoPublishChannel.Main}) async {
+  Future<void> startPublishingStream(
+    String streamID, {
+    ZegoPublishChannel channel = ZegoPublishChannel.Main,
+  }) async {
     currentUser!.streamID = streamID;
 
     debugPrint('startPublishingStream:$streamID');

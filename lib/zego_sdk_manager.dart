@@ -18,10 +18,12 @@ class ZEGOSDKManager {
 
   int appID = 0;
   String appSign = '';
+  String environment = '';
 
   Future<void> init(
     int appID,
     String? appSign, {
+    String environment = 'staging',
     ZegoScenario scenario = ZegoScenario.Default,
   }) async {
     await expressService.init(appID: appID, appSign: appSign);
@@ -30,6 +32,7 @@ class ZEGOSDKManager {
 
     this.appID = appID;
     this.appSign = appSign ?? '';
+    this.environment = environment;
   }
 
   Future<void> initEffects() async {

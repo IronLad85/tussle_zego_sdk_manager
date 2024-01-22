@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:tussle_zego_sdk_manager/zego_sdk_manager.dart';
 
 import '../../internal_defines.dart';
 import 'express_service.dart';

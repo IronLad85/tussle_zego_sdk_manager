@@ -253,9 +253,9 @@ class PKService implements PKServiceInterface {
       //...
     } else {
       muteHostAudioVideo(false);
-      ZEGOSDKManager()
-          .expressService
-          .stopPlayingMixerStream(generateMixerStreamID());
+      ZEGOSDKManager().expressService.stopPlayingMixerStream(
+            generateMixerStreamID(),
+          );
     }
     pkInfo = null;
     cancelTime();

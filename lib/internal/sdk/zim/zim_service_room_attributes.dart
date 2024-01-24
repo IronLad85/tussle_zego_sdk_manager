@@ -82,10 +82,20 @@ extension ZIMServiceRoom on ZIMService {
         roomAttributesMap.remove(key);
       }
     });
-    roomAttributeUpdateStreamCtrl
-        .add(ZIMServiceRoomAttributeUpdateEvent(updateInfo: updateInfo));
-    roomAttributeUpdateStreamCtrl2
-        .add(RoomAttributesUpdatedEvent(setProperties, deleteProperties));
+
+    roomAttributeUpdateStreamCtrl.add(
+      ZIMServiceRoomAttributeUpdateEvent(
+        updateInfo: updateInfo,
+        roomId: roomID,
+      ),
+    );
+
+    roomAttributeUpdateStreamCtrl2.add(
+      RoomAttributesUpdatedEvent(
+        setProperties,
+        deleteProperties,
+      ),
+    );
   }
 
   void onRoomAttributesBatchUpdated(

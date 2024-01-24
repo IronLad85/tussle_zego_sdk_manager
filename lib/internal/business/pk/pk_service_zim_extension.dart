@@ -303,15 +303,16 @@ extension PKServiceZIMExtension on PKService {
       for (final pkuser in pkUserList) {
         seiTimeMap[pkuser.userID] = DateTime.now().millisecondsSinceEpoch;
       }
+
       if (pkInfo == null) {
         if (ZegoLiveStreamingManager().hostNoti.value != null) {
           pkInfo = PKInfo()
             ..requestID = requestId ?? ''
             ..pkUserList.value = pkUserList;
           checkSEITime();
-          ZEGOSDKManager()
-              .expressService
-              .startPlayingMixerStream(generateMixerStreamID());
+          ZEGOSDKManager().expressService.startPlayingMixerStream(
+                generateMixerStreamID(),
+              );
           pkStateNoti.value = RoomPKState.isStartPK;
           onPKStartStreamCtrl.add(null);
 
@@ -327,6 +328,28 @@ extension PKServiceZIMExtension on PKService {
         final updateUsers = pkUserList.map((e) => e.userID).toList();
         onPKBattleUserUpdateCtrl
             .add(PKBattleUserUpdateEvent(userList: updateUsers));
+      }
+    }
+  }
+
+  triggerPKBattleView(
+    String requestId,
+  ) {
+    checkSEITime();
+    ZEGOSDKManager().expressService.startPlayingMixerStream(
+          generateMixerStreamID(),
+        );
+    pkStateNoti.value = RoomPKState.isStartPK;
+    onPKStartStreamCtrl.add(null);
+
+    for (final pkuser in pkInfo!.pkUserList.value) {
+      if (pkuser.hasAccepted) {
+        onPKUserJoinCtrl.add(
+          PKBattleUserJoinEvent(
+            userID: pkuser.userID,
+            extendedData: pkuser.extendedData,
+          ),
+        );
       }
     }
   }

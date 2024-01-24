@@ -271,8 +271,12 @@ class UserRequestTimeOutEvent {
 }
 
 class ZIMServiceRoomAttributeUpdateEvent {
+  final String roomId;
   final ZIMRoomAttributesUpdateInfo updateInfo;
-  ZIMServiceRoomAttributeUpdateEvent({required this.updateInfo});
+  ZIMServiceRoomAttributeUpdateEvent({
+    required this.updateInfo,
+    required this.roomId,
+  });
 
   @override
   String toString() {

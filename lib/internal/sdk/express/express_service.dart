@@ -144,6 +144,13 @@ class ExpressService {
     ZegoExpressEngine.instance.useFrontCamera(isFrontFacing);
   }
 
+  void setVideoResolutionTo360() {
+    ZegoVideoConfig videoConfig = ZegoVideoConfig.preset(
+      ZegoVideoConfigPreset.Preset360P,
+    );
+    ZegoExpressEngine.instance.setVideoConfig(videoConfig);
+  }
+
   void enableVideoMirroring(bool isVideoMirror) {
     ZegoExpressEngine.instance.setVideoMirrorMode(
       isVideoMirror
